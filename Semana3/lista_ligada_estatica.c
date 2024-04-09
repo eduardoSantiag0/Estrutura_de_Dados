@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 //// Inicializar a estrutura
-//// Retornar a quantidade de elementos válidos
+//TODO Retornar a quantidade de elementos válidos
 //TODO Exibir os elementos da estrutura
 //TODO Buscar por um elemento na estrutura
 //TODO Inserir elementos na estrutura
@@ -61,19 +61,32 @@ void calculadorNumerosValidos (LISTA* lista) {
     
 }
 
-void AdicionarElementos(LISTA* lista, ELEMENTO inputElem) {
-    int i;
-    if (lista->inicio == INVALIDO) lista->inicio = inputElem.numChave;
+void AdicionarElementos(LISTA* lista, int inputElem) {
+    int pos = lista->dispo;
+    // Caso seja o primeiro item;
+    if (lista->inicio == INVALIDO) {
+        lista->inicio = inputElem;
+        lista->A[0].numChave = inputElem;
+        lista->A[0].prox = INVALIDO;
+    }
+
+    int i = 0;
+    while (lista->A[i].prox != INVALIDO)
+    {
+        i++;
+    } 
+    lista->A[i].prox = inputElem;
+
 
 }
 
 void IMPRIMINDO (LISTA* lista) {
-    int i;
+    //!
+    int i = lista->inicio;
     while (lista->A[i].prox != INVALIDO)
     {
         printf("%d\n",lista->A[i].numChave);
-        i++;
-        
+        i = lista->A[i].prox; //!
     }
 }
 
@@ -81,13 +94,14 @@ int main (void)
 {
     LISTA minhaLista;
     InicializarLista(&minhaLista);
-    printf("Lista Inicializada\n");
+    printf("\tLista Inicializada\n");
 
-    ELEMENTO first = {10, NULL};
+    AdicionarElemento(&minhaLista, 10);
+    AdicionarElemento(&minhaLista, 20);
+    AdicionarElemento(&minhaLista, 30);
+    AdicionarElemento(&minhaLista, 40);
 
-    AdicionarElementos(&minhaLista, first);
-
-
+    printf("\tLista Após Adicoes\n");
     IMPRIMINDO(&minhaLista);
 
 
