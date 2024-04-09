@@ -69,8 +69,7 @@ void quickSort (LISTA* arranjo)
 
 int buscaBinaria (LISTA* arranjo, int input_buscar) 
 {
-  int out_pos;
-  int j = 0;
+  int out_pos = -1;
   
   //* esq = min 
   int esq = 0;
@@ -78,20 +77,44 @@ int buscaBinaria (LISTA* arranjo, int input_buscar)
   int dir = arranjo->numElem - 1;
   //* meio = range de possíveis numeros
   int meio;
-  
-  while (arranjo->A[j].chave != input_buscar || arranjo->A[j].chave >= arranjo->numElem) 
+
+  while (esq <= dir) 
   {
-    //? while (esq <= dir)
-    //? Como atualizar esq e dir
-    meio = (esq + dir) / 2; 
+    meio = esq + (esq + dir) / 2;
 
-    if (arranjo->A[j].chave == input_buscar) {
-      out_pos = j;
-      return out_pos;
+    // caso o item do meio seja o item procurado
+    if (arranjo->A[meio].chave == input_buscar) {
+      out_pos = meio;
+      break;
     }
+    
+    if (arranjo->A[meio].chave < input_buscar)
+      esq = meio + 1;
+    else 
+      dir = meio -1; 
+
+  }
+
+  return out_pos;
+
+}
 
 
-    j++;
+int recursivaBuscaBinaria (LISTA* arranjo, int in_busca, int esq, int dir) {
+  if (dir >= esq) {
+    int meio = esq + (esq + dir) / 2;
+
+    if (arranjo->A[meio].chave == in_busca) 
+      return meio;
+
+    // Right Half
+    if (arranjo->A[meio].chave > in_busca)
+      return recursivaBuscaBinaria(arranjo, in_busca, esq, meio - 1);
+
+    // Left Half
+    if (arranjo->A[meio].chave < in_busca)
+      return recursivaBuscaBinaria(arranjo, in_busca, meio + 1, dir);
+
   }
 
   return -1;
@@ -116,11 +139,23 @@ int main (void) {
     REGISTRO reg2 = {20};
     REGISTRO reg3 = {30};
     REGISTRO reg4 = {400};
+    REGISTRO reg5 = {325};
+    REGISTRO reg6 = {225};
+    REGISTRO reg7 = {112};
+    REGISTRO reg8 = {45};
+    REGISTRO reg9 = {22};
+    REGISTRO reg10 = {77};
     // Add Elemento
     adicionarElemento (&lista, reg1, 0);
     adicionarElemento (&lista, reg2, 1);
     adicionarElemento (&lista, reg4, 2);
     adicionarElemento (&lista, reg3, 2);
+    adicionarElemento (&lista, reg5, 2);
+    adicionarElemento (&lista, reg6, 2);
+    adicionarElemento (&lista, reg7, 2);
+    adicionarElemento (&lista, reg8, 2);
+    adicionarElemento (&lista, reg9, 2);
+    adicionarElemento (&lista, reg10, 2);
 
     int i;
 
@@ -136,6 +171,17 @@ int main (void) {
     printf("\t QuickSort\n");
     quickSort(&lista);
     Log(&lista);
+
+    printf("\t Busca Binaria\n");
+    int busca = 225;
+    int out = buscaBinaria(&lista, busca);
+    printf("%d na posicao  %d\n",busca, out);
+
+    printf("\t Recursiva - Busca Binaria\n");
+    int out_recursiva = recursivaBuscaBinaria(&lista, busca, 0, lista.numElem - 1);
+    printf("%d na posicao  %d\n",busca, out_recursiva);
+
+
 
 
     return 0;
