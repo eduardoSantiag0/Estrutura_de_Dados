@@ -122,7 +122,6 @@ void reiniciarLista (LISTA* lista) {
     ELEMENTO* proximo;
 
     while (atual != NULL) {
-        
         proximo = atual->proximo;
         printf("Excluindo memoria da chave: %d\n",atual->chave);
         free(atual);
@@ -160,6 +159,9 @@ int main (void) {
     excluirElemento(&meuArranjo, 7);
     IMPRIMIR (&meuArranjo);
     reiniciarLista(&meuArranjo);
+
+    printf (" \n\nStruct: %d\n", sizeof(ELEMENTO));
+    printf ("Ponteiro para Struct: %d\n", sizeof(ELEMENTO*));
 
 
 
