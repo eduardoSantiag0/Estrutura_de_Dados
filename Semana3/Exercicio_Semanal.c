@@ -88,12 +88,12 @@ void inserirElemListaOrdenada(ARRANJO* arranjo, int inputNum) {
 
 }
 
-ELEMENTO*  buscarSequencialOrdenada (ARRANJO* arr, int inputBusca, ELEMENTO* anterior) {
+ELEMENTO*  buscarSequencialOrdenada (ARRANJO* arr, int inputBusca, ELEMENTO** anterior) {
     ELEMENTO* pos = arr->inicio;
+    *anterior = NULL;
 
-    while (pos != NULL && pos->chave < inputBusca)
-    {
-        anterior = pos->anterior;
+    while (pos != NULL && pos->chave < inputBusca){
+        *anterior = pos->anterior;
         pos = pos->proximo;
     }
 
@@ -108,16 +108,35 @@ void exclusaoElemento (ARRANJO* arr, int inputNum) {
     ELEMENTO* pos = arr->inicio;
     ELEMENTO* anterior = NULL;
 
-
-    while (pos != NULL && pos->chave < inputNum)
-    {
-        if (pos->chave == inputNum) {
-            
-            printf("Excluido com Sucesso!");
-        }
-        anterior = pos;
-        pos = pos->proximo;
+    // Primeiro
+    if (pos != NULL && pos->chave == inputNum) {
+        arr->inicio = pos->proximo;
+        free (pos);
+        printf("Numero excluido\n");
+        return;
     }
+
+    pos = buscarSequencialOrdenada(arr, inputNum, &anterior); 
+    if (pos == NULL) {
+        printf("Esse numero nao existe na lista\n");
+        return;
+    }
+
+    // Ultimo 
+    if (pos->proximo == NULL) {
+        //? Anterior
+        anterior->proximo = NULL; //!
+        free(pos);
+        printf("Ultimo Numero excluido com sucesso\n");
+        return;
+    }
+
+    // Meio da Lista
+    pos->proximo->anterior = pos->anterior; //?
+    anterior->proximo = pos->proximo; 
+    free(pos);
+    printf("Numero excluido com sucesso\n");
+    return;
     
 }
 
@@ -137,13 +156,14 @@ void reinicializarLista (ARRANJO* arr) {
 }
 
 void IMPRIMIR (ARRANJO* arr) {
+    printf("\n");
     ELEMENTO* pos = arr->inicio;
     while (pos != NULL)
     {
         printf("%d\n", pos->chave);
         pos = pos->proximo;
     }
-    
+   
 }
 
 int main (void) {
@@ -155,6 +175,12 @@ int main (void) {
     inserirElemListaOrdenada (&meuArranjo, 60);
     inserirElemListaOrdenada (&meuArranjo, 20);
     IMPRIMIR(&meuArranjo);
+    
+    exclusaoElemento(&meuArranjo, 60);
+    IMPRIMIR(&meuArranjo);
+
+    // reinicializarLista(&meuArranjo);
+    // IMPRIMIR(&meuArranjo);
 
     return 0;
 }
