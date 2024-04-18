@@ -2,7 +2,7 @@
 
 //// Iniciar Lista
 //// Retornar elementos válidos
-// Buscar por um elemento na lista
+//// Buscar por um elemento na lista
 //// Inserir elementos - Push
 //// Exibir elementos 
 //// Excluir elementos - Pop

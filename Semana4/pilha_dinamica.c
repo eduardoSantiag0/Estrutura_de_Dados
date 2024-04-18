@@ -66,22 +66,22 @@ void reiniciarPilha (PILHA* p) {
 }
 
 int main (void) {
-    PILHA din_pilha;
+    PILHA pilhaDinamica;
 
-    iniciarLista(&din_pilha);
-    pushElemento(&din_pilha, 10);
-    pushElemento(&din_pilha, 20);
-    pushElemento(&din_pilha, 50);
-    pushElemento(&din_pilha, 40);
-    pushElemento(&din_pilha, 30);
-    exibirPilha(&din_pilha);
+    iniciarLista(&pilhaDinamica);
+    pushElemento(&pilhaDinamica, 10);
+    pushElemento(&pilhaDinamica, 20);
+    pushElemento(&pilhaDinamica, 50);
+    pushElemento(&pilhaDinamica, 40);
+    pushElemento(&pilhaDinamica, 30);
+    exibirPilha(&pilhaDinamica);
 
     printf("\n");
 
-    popElemento(&din_pilha);
-    popElemento(&din_pilha);
-    exibirPilha(&din_pilha);
+    popElemento(&pilhaDinamica);
+    popElemento(&pilhaDinamica);
+    exibirPilha(&pilhaDinamica);
 
-    reiniciarPilha(&din_pilha);
-    exibirPilha(&din_pilha);
+    reiniciarPilha(&pilhaDinamica);
+    exibirPilha(&pilhaDinamica);
 }

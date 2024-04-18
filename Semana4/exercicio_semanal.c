@@ -2,7 +2,8 @@
 #define MAX 5
 
 
-//*Objetivo:  Fazer uma pilha que imprima ao inverso
+//! Objetivo:  Fazer uma pilha que imprima ao inverso
+
 
 typedef struct 
 {
