@@ -157,10 +157,12 @@ void IMPRIMIR (LISTA* lista) {
 void mergeSorted (LISTA* l1, LISTA* l2, LISTA* lout) {
     ELEMENTO* pos1 = l1->inicio;
     ELEMENTO* pos2 = l2->inicio;
-    ELEMENTO* out = NULL;
+    ELEMENTO* out = lout->inicio;
 
-    while (pos1 != NULL && pos2 != NULL)
+    while (pos1 != NULL || pos2 != NULL)
     {
+
+        ELEMENTO* novoElemento = (ELEMENTO*) malloc (sizeof(ELEMENTO));
 
         // pos1 maior que pos2
         // pos2 maior que pos1
@@ -195,24 +197,27 @@ void mergeSorted (LISTA* l1, LISTA* l2, LISTA* lout) {
             pos2 = pos2->proximo;
         } 
         
+        
+        if (pos1 != NULL) {
+            out->proximo = pos1;
+            pos1->ant = out;
+            out = out->proximo;
+            pos1 = pos1->proximo;
+        }
+
+
+        if (pos2 != NULL) {
+            out->proximo = pos2;
+            pos2->ant = out;
+            out = out->proximo;
+            pos1 = pos1->proximo;
+        }
     }
 
-    while (pos1 != NULL) {
-        out->proximo = pos1;
-        pos1->ant = out;
-        out = out->proximo;
-        pos1 = pos1->proximo;
-    }
-
-
-    while (pos2 != NULL) {
-        out->proximo = pos2;
-        pos2->ant = out;
-        out = out->proximo;
-        pos1 = pos1->proximo;
-    }
 
     printf("Merge Completed!\n");
+
+    return;
 
 }
 
