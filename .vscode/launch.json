@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/1Du/MyScripts/_AED/Estrutura_de_Dados/Semana3",
-      "program": "c:/1Du/MyScripts/_AED/Estrutura_de_Dados/Semana3/build/Debug/outDebug",
+      "cwd": "c:/1Du/MyScripts/_AED/Estrutura_de_Dados/Semana5",
+      "program": "c:/1Du/MyScripts/_AED/Estrutura_de_Dados/Semana5/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
