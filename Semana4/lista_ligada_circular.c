@@ -6,7 +6,7 @@
 //// Buscar por um elemento na lista
 //// Inserir elementos
 //// Exibir elementos
-//TODO Excluir elementos
+//// Excluir elementos
 //// Reiniciar lista
 
 
