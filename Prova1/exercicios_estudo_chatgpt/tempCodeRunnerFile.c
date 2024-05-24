@@ -1,0 +1,1 @@
+atual->prox != l->
