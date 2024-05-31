@@ -1,0 +1,50 @@
+Exibindo lista [0 aluno(s)]
+   Ordenada por nusp:
+   Ordenada por nota:
+Inseracao do aluno 1234 retornou true.	(OK)
+Exibindo lista [1 aluno(s)]
+   Ordenada por nusp: (1234, 100,  95)
+   Ordenada por nota: (1234, 100,  95)
+Inseracao do aluno 1234 retornou false.	(OK)
+Exibindo lista [1 aluno(s)]
+   Ordenada por nusp: (1234, 100,  95)
+   Ordenada por nota: (1234, 100,  95)
+Inseracao do aluno 1111 retornou true.	(OK)
+Exibindo lista [2 aluno(s)]
+   Ordenada por nusp: (1111,  50,  75) (1234, 100,  95)
+   Ordenada por nota: (1111,  50,  75) (1234, 100,  95)
+Inseracao do aluno 2345 retornou true.	(OK)
+Exibindo lista [3 aluno(s)]
+   Ordenada por nusp: (1111,  50,  75) (1234, 100,  95) (2345,  25, 100)
+   Ordenada por nota: (2345,  25, 100) (1111,  50,  75) (1234, 100,  95)
+Inseracao do aluno 2345 retornou false.	(OK)
+Exibindo lista [3 aluno(s)]
+   Ordenada por nusp: (1111,  50,  75) (1234, 100,  95) (2345,  25, 100)
+   Ordenada por nota: (2345,  25, 100) (1111,  50,  75) (1234, 100,  95)
+Aluno nao encontrado: '9876'
+Nota do aluno 1234: 100
+Nota do aluno 1111:  50
+Nota do aluno 2345:  25
+A exclursao do aluno 2345 retornou true.	(OK)
+Exibindo lista [2 aluno(s)]
+   Ordenada por nusp: (1111,  50,  75) (1234, 100,  95)
+   Ordenada por nota: (1111,  50,  75) (1234, 100,  95)
+A exclursao do aluno 2345 retornou false.	(OK)
+Exibindo lista [2 aluno(s)]
+   Ordenada por nusp: (1111,  50,  75) (1234, 100,  95)
+   Ordenada por nota: (1111,  50,  75) (1234, 100,  95)
+A exclursao do aluno 1234 retornou true.	(OK)
+Exibindo lista [1 aluno(s)]
+   Ordenada por nusp: (1111,  50,  75)
+   Ordenada por nota: (1111,  50,  75)
+A exclursao do aluno 1111 retornou true.	(OK)
+Exibindo lista [0 aluno(s)]
+   Ordenada por nusp:
+   Ordenada por nota:
+A exclursao do aluno -1 retornou false.	(OK)
+Exibindo lista [0 aluno(s)]
+   Ordenada por nusp:
+   Ordenada por nota:
+Exibindo lista [6 aluno(s)]
+   Ordenada por nusp: (1997,  77,  87) (1998,  78,  88) (1999,  79,  89) (2000,  80,  90) (2001,  81,  91) (2002,  82,  92)
+   Ordenada por nota: (1997,  77,  87) (1998,  78,  88) (1999,  79,  89) (2000,  80,  90) (2001,  81,  91) (2002,  82,  92)
