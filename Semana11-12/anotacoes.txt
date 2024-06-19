@@ -1,0 +1,16 @@
+--Fonte: https://medium.com/@ozgurmehmetakif/avl-tree-665476662bf3
+
+When to Perform Rotation Operations in Insertion Operations?
+
+If the Balance Factor > 1, it means that the height of the left subtree of the node is greater than the height of the right subtree. In this case, either a right rotation or a left-right rotation operation is performed.
+
+a. If the newly added node is to the left of the parent node, a right rotation operation is performed.
+
+b. If the newly added node is to the right of the parent node, a left-right rotation operation is performed.
+
+If the Balance Factor < -1, it means that the height of the right subtree of the node is greater than the height of the left subtree. In this case, either a left rotation or a right-left rotation operation is performed.
+
+a. If the newly added node is to the right of the parent node, a left rotation operation is performed.
+
+b. If the newly added node is to the left of the parent node, a right-left rotation operation is performed.
+
