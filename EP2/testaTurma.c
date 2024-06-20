@@ -186,5 +186,9 @@ int main(){
 
 	exibirTurma(&turma1);
 
+	char f;
+	printf("Aperte <SPACE> para finalizar o programa\n");
+	scanf("%c", f);
+
 	return 0;
 }

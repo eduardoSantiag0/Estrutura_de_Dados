@@ -9,11 +9,11 @@
 /**                                                                 **/
 /*********************************************************************/
 
-//todo tamanho
-//todo buscarAluno
-//todo inserirAluno
-//todo excluirAluno
-//todo inserirNotaRecuperacao
+//// tamanho
+//// inserirAluno
+//// buscarAluno
+//// excluirAluno
+//// inserirNotaRecuperacao
 
 // Duplamente Ligada: Cada nó na lista possui referências tanto para o nó anterior quanto para o próximo nó na sequência.
 // Ordenada: Os elementos são mantidos em ordem crescente ou decrescente com base em um critério específico (como valores numéricos, por exemplo).
@@ -39,8 +39,20 @@ void print123(){
    como parametro de entrada (deve somar os alunos das tres listas). */
 int tamanho(TURMA* turma){
 	int tam = 0;
+	PONT atual;
+	int i;
 
 	// todo COMPLETE/IMPLEMENTE SEU CODIGO AQUI 
+	for (i = 0; i < 3; i++) 
+	{
+		atual = turma->LISTAS[i]->prox; // Primeiro é o nó cabeça
+		while (atual != turma->LISTAS[i])
+		{
+			tam++;
+			atual = atual->prox;
+		}		
+
+	}
 
 	return tam;
 }
@@ -51,8 +63,18 @@ int tamanho(TURMA* turma){
    o endereco de memoria do ELEMENTO que contem o respectivo aluno, caso
    ele esteja presente na turma. */
 PONT buscarAluno(TURMA* turma, int nusp){
-
-	// todo COMPLETE/IMPLEMENTE SEU CODIGO AQUI 
+	int i;
+	PONT walk;
+	for (i = 0; i < 3 ; i++) 
+	{
+		walk = turma->LISTAS[i]->prox;
+		while (walk != turma->LISTAS[i])
+		{
+			if (walk->aluno.nusp == nusp) 
+				return walk;
+			walk = walk->prox;
+		}
+	}
 	
 	return NULL;
 }
@@ -80,9 +102,60 @@ PONT buscarAluno(TURMA* turma, int nusp){
 */
 bool inserirAluno(TURMA* turma, int nusp, int nota, int frequencia){
 
-	// todo COMPLETE/IMPLEMENTE SEU CODIGO AQUI 
+	// Retornar false caso o número USP seja menor do que zero, ou a nota seja menor do que zero ou maior do que cem ou a frequência seja menor do que zero ou maior do que cem
+	if (nusp < 0 || nota < 0 || nota > 100 || frequencia < 0 || frequencia > 100 )
+		return false;
+
 	
-	return false;
+	// Deve, também, retornar false se a turma já contiver um aluno com o mesmo número USP.
+	if (buscarAluno(turma, nusp) != NULL) 
+		return false;
+
+
+	// Caso contrário, esse novo aluno deverá ser inserido na turma e a função deverá retornar  true. A inserção na turma contém as seguintes atividades 
+	// 1a) alocação dinâmica de memória de uma estrutura do tipo ELEMENTO. Os campos do aluno do respectivo elemento deverão ser preenchidos com os valores recebidos como parâmetro pela função.
+	PONT novoAluno = (PONT) malloc (sizeof (ELEMENTO));
+    if (novoAluno == NULL) return false;
+
+	novoAluno->aluno.nota = nota;
+	novoAluno->aluno.nusp = nusp;
+	novoAluno->aluno.freq = frequencia;
+
+
+	// 2a) este novo elemento deverá ser inserido na lista ligada correta, de acordo com a nota e a frequência do aluno (LISTAS[0] para alunos aprovados; LISTAS[1] para alunos em recuperação; e LISTAS[2] para alunos reprovados).
+	int tipoTurma;
+
+	// Lista 0 -> (nota≥50 e frequência≥70)
+	if (nota >= 50 && frequencia >= 70) 
+		tipoTurma = 0;
+	// Lista 1 -> (nota≥30 e nota<50 e frequência≥70)
+	else if (nota >= 30 && nota < 50 && frequencia >= 70)
+		tipoTurma = 1;
+	// (frequência<70  ou [nota<30 antes da recuperação ou nota<50 depois da recuperação]).
+	else 
+		tipoTurma = 2;
+
+
+	
+	// (lembre-se que todas as listas são ordenadas de acordo com o número USP do aluno):
+	// 3a) por fim, a função deverá retornar true
+	PONT atual = turma->LISTAS[tipoTurma]->prox;
+	PONT anterior = turma->LISTAS[tipoTurma];
+
+	while (atual->aluno.nusp < nusp && atual != turma->LISTAS[tipoTurma])
+	{
+		anterior = atual;
+		atual = atual->prox;
+	}
+
+	novoAluno->prox = atual;
+	novoAluno->ant = anterior;
+	anterior->prox = novoAluno;
+	atual->ant = novoAluno;
+
+	return true;
+	
+	
 }
 
 
@@ -98,9 +171,16 @@ bool inserirAluno(TURMA* turma, int nusp, int nota, int frequencia){
 */
 bool excluirAluno(TURMA* turma, int nusp){
 
-	// todo COMPLETE/IMPLEMENTE SEU CODIGO AQUI 
+	PONT alunoExcluir = buscarAluno(turma, nusp);
+	if (alunoExcluir == NULL) return false;
 
-	return false;
+	//Acertar ponteiros
+	alunoExcluir->ant->prox = alunoExcluir->prox;
+	alunoExcluir->prox->ant =  alunoExcluir->ant;
+
+	// Remoção do elemento
+	free(alunoExcluir);
+	return true; 
 }
 
 /* Funcao que recebe o endereco de uma turma, o numero USP e a nota de 
@@ -114,13 +194,42 @@ bool excluirAluno(TURMA* turma, int nusp){
    Apos a remocao do aluno da lista de alunos em recuperacao e insercao na 
    lista correta (de acordo com o desempenho na recuperacao),
    a funcao devera retornar true. */
-bool inserirNotaRecuperacao(TURMA* turma, int nusp, int nota){
 
-	// todo COMPLETE/IMPLEMENTE SEU CODIGO AQUI 
-
+bool verificarRecuperacao (TURMA* turma, int nusp) 
+{
+	PONT walkRecuperacao = turma->LISTAS[1]->prox;
+	while (walkRecuperacao != turma->LISTAS[1])
+	{
+		if (walkRecuperacao->aluno.nusp == nusp) 
+			return true;
+		walkRecuperacao = walkRecuperacao->prox;
+	}
 	return false;
 }
 
+bool inserirNotaRecuperacao(TURMA* turma, int nusp, int nota){
+
+	PONT alunoRecuperacao = buscarAluno(turma, nusp);
+	if (alunoRecuperacao == NULL)
+		return false;
+	
+	
+	// Retornar false caso este aluno nao esteja presenta na lista de alunos em recuperacao (LISTAS[1]).
+	if (!verificarRecuperacao(turma, nusp)) return false;
+
+
+	// Caso contrario, esse aluno devera ter sua nota atualizada com o valor passado como parametro
+	alunoRecuperacao->aluno.nota = nota;
+	
+	//, ser retirado da lista de recuperação e 
+	// excluirAluno(turma, alunoRecuperacao->aluno.nusp);
+	// inserido na lista correta, ordenada pelo numero USP.
+	int freq = alunoRecuperacao->aluno.freq;
+	if (!excluirAluno(turma, nusp)) 
+		return false;
+
+	return inserirAluno(turma, nusp, nota, freq);
+}
 
 
 /* Funcao que cria e retorna uma TURMA.
