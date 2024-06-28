@@ -1,1 +1,1 @@
-Estudos de Algoritmos e Estruturas de Dados usando as  videoaulas e materiais pelos professores  Luciano Antonio Digiampietri e Norton Trevisan Roman da USP para as disciplinas Algoritmos e Estruturas de Dados I (ACH2023) da USP e Estruturas de Dados da UNIVESP.
+Estudos de Algoritmos e Estruturas de Dados usando as  videoaulas e materiais pelos professores Luciano Antonio Digiampietri e Norton Trevisan Roman da USP para as disciplinas Algoritmos e Estruturas de Dados I (ACH2023) da USP e Estruturas de Dados da UNIVESP.
